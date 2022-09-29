@@ -1,16 +1,15 @@
 package contabanco;
-import java.util.Date;
-
+import java.time.LocalDate;
 public class Cliente {
     private String nomeCliente;
-    private Date dataDeNasc;
+    private LocalDate dataDeNasc;
     private String cpf;
 
 
 
-    public Cliente (String nomeCliente, Date dadDeNasc, String cpf){
+    public Cliente (String nomeCliente, LocalDate dataDeNasc, String cpf){
         this.nomeCliente = nomeCliente;
-        this.dataDeNasc = dadDeNasc;
+        this.dataDeNasc = dataDeNasc;
         this.cpf = cpf;
     }
     
@@ -20,10 +19,10 @@ public class Cliente {
     public void setNomeCliente(String nomeCliente) {
         this.nomeCliente = nomeCliente;
     }
-    public Date getDataDeNasc() {
+    public LocalDate getDataDeNasc() {
         return dataDeNasc;
     }
-    public void setDataDeNasc(Date dataDeNasc) {
+    public void setDataDeNasc(LocalDate dataDeNasc) {
         this.dataDeNasc = dataDeNasc;
     }
     public String getCpf() {
