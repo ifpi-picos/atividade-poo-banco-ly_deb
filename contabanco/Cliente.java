@@ -1,16 +1,22 @@
 package contabanco;
 import java.time.LocalDate;
+import java.util.Calendar;
 public class Cliente {
     private String nomeCliente;
     private LocalDate dataDeNasc;
+    private Endereco endereco;
     private String cpf;
 
-
-
-    public Cliente (String nomeCliente, LocalDate dataDeNasc, String cpf){
+    
+    public Cliente (){
+        
+    }
+    
+    public Cliente (String nomeCliente, LocalDate dadDeNasc, String cpf, Endereco endereco){
         this.nomeCliente = nomeCliente;
-        this.dataDeNasc = dataDeNasc;
+        this.dataDeNasc = dadDeNasc;
         this.cpf = cpf;
+        this.endereco = endereco;
     }
     
     public String getNomeCliente() {
@@ -33,7 +39,34 @@ public class Cliente {
     }
     public String toString(){
         return "\nNome: " + this.getNomeCliente() +
-                "\nCPF: " + this.getCpf() +
-                "\nData de Nascimento: " + this.getDataDeNasc();
+        "\nCPF: " + this.getCpf() +
+        "\nData de Nascimento: " + this.getDataDeNasc();
+    }
+    public String checaData(LocalDate dataDeNasc){
+        Calendar c = Calendar.getInstance();
+        if ((c.get(Calendar.YEAR) - dataDeNasc.getYear()) >= 18 && (c.get(Calendar.YEAR) - dataDeNasc.getYear()) < 100){
+            return "Y";
+        } else if (c.get(Calendar.YEAR) - dataDeNasc.getYear() < 18){
+            return "M";
+        } else{
+            return "I";
+        }
+    }
+
+    public String checaCPF(String cpf){
+        cpf = cpf.trim();
+        cpf = cpf.replace("-", "");
+        cpf = cpf.replace(".", "");
+        cpf = cpf.replace(",", "");
+        boolean isnum = cpf.matches("[+-]?\\d*(\\.\\d+)?");
+        if(cpf.length() == 11 && isnum == true){
+            return "V";
+        } else if (cpf.length() == 11 && isnum == false){
+            return "Il";
+        } else if (isnum == true && (cpf.length() > 11 || cpf. length() < 11)){
+            return "In";
+        }else{
+            return "I";
+        }
     }
 }

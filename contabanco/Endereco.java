@@ -1,3 +1,4 @@
+package contabanco;
 public class Endereco {
     private String rua;
     private int numCasa;

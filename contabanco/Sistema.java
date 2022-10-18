@@ -1,22 +1,21 @@
 package contabanco;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+
 public class Sistema {
     
     static Scanner scan = new Scanner(System.in);
     static Random random =  new Random();
     static DateTimeFormatter sdf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     static ArrayList<Conta> contasBancarias;
-    static SimpleDateFormat sdff = new SimpleDateFormat("dd/MM/yyyy");
         
         public static void main(String[] args){
             contasBancarias = new ArrayList<>();
             operacoes();
-            
+           
         }
 
         public static void operacoes(){
@@ -32,6 +31,7 @@ public class Sistema {
             System.out.println("-----------------------------------------");
             
             int operacao = scan.nextInt();
+            scan.nextLine();
     
             switch(operacao){
                 case 1:
@@ -62,20 +62,59 @@ public class Sistema {
         }
 
         public static void criarConta(){
-            System.out.println("\nNome: ");
-            String nomeCliente = scan.next();
+            Cliente man = new Cliente();
+            System.out.print("\nNome: ");
+            String nomeCliente = scan.nextLine();
     
-            System.out.println("\nCPF: ");
-            String cpf = scan.next();
+            System.out.print("\nCPF: ");
+            String cpft = scan.nextLine();
+
+            if (man.checaCPF(cpft).equals("V")){
+
+            }else if(man.checaCPF(cpft).equals("Il")){
+                System.out.println("CPF invalido.");
+                operacoes();
+            }else if(man.checaCPF(cpft).equals("In")){
+                System.out.println("Quantidade de números invalido.");
+                operacoes();
+            }else{
+                System.out.println("Quantidade de números invalida, não utilize simbolos!!");
+                operacoes();
+            }
+
+            String cpf = cpft;
 
             System.out.println("\nData de nascimento: ");
-            LocalDate dataDeNasc = LocalDate.parse(scan.next());
+            LocalDate data = LocalDate.parse(scan.nextLine(), sdf);
+
+            if(man.checaData(data).equals("Y")){
+
+            }else if (man.checaData(data).equals("M")){
+                System.out.println("Menor de idade!");
+                operacoes();
+            }else {
+                System.out.println("Dara de nascimento invalida!");
+                operacoes();
+            }
+
+            LocalDate dataDeNasc = data;
+
+            System.out.println("\nNome da Rua: ");
+            String rua = scan.nextLine();
+
+            System.out.println("\nNome do bairro: ");
+            String bairro = scan.nextLine();
+
+            System.out.println("\nNúmero da casa: ");
+            int numCasa = scan.nextInt();
+            scan.nextLine();
 
             System.out.println("\nO numero da Conta: ");
             int numConta = random.nextInt(99999)+10000;
             System.out.println(numConta);
             
-            Cliente cliente = new Cliente(nomeCliente, dataDeNasc, cpf);
+            Endereco endereco = new Endereco(rua, numCasa, bairro);
+            Cliente cliente = new Cliente(nomeCliente, dataDeNasc, cpf, endereco);
             Conta conta = new Conta(numConta, cliente);
 
             contasBancarias.add(conta);
@@ -101,7 +140,7 @@ public class Sistema {
 
             System.out.println("Numero da Conta para Deposito: ");
             int numConta = scan.nextInt();
-
+            scan.nextLine();
             Conta conta = encotraConta(numConta);
 
             if(conta != null){
@@ -183,5 +222,3 @@ public class Sistema {
         }
     
 }
-
-.
