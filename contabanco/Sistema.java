@@ -15,7 +15,6 @@ public class Sistema {
         public static void main(String[] args){
             contasBancarias = new ArrayList<>();
             operacoes();
-           
         }
 
         public static void operacoes(){
@@ -56,9 +55,7 @@ public class Sistema {
                     System.out.println("Opção invalida!");
                     operacoes();
                     break; 
-    
             }
-    
         }
 
         public static void criarConta(){

@@ -4,13 +4,10 @@ public class Conta {
     private String numAgencia = "0123";
     private int numConta;
     private int digito;
-   
     private Cliente cliente;
     private double saldo = 0.00f;
     
-    
     public Conta(int numConta,Cliente cliente){
-
         this.numConta = numConta;
         this.digito = digitoConta;
         this.cliente = cliente;

@@ -7,9 +7,7 @@ public class Cliente {
     private Endereco endereco;
     private String cpf;
 
-    
-    public Cliente (){
-        
+    public Cliente (){   
     }
     
     public Cliente (String nomeCliente, LocalDate dadDeNasc, String cpf, Endereco endereco){
