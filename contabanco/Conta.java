@@ -1,22 +1,24 @@
 package contabanco;
 public class Conta {
     private static int digitoConta = 1;
-    private String numAgencia = "0123";
+    private int numAgencia;
     private int numConta;
     private int digito;
     private Cliente cliente;
-    private double saldo = 0.00f;
+    private double saldo;
     
-    public Conta(int numConta,Cliente cliente){
+    public Conta(int numAgencia, int numConta,Double saldo, Cliente cliente){
+        this.numAgencia = numAgencia;
         this.numConta = numConta;
+        this.saldo = saldo;
         this.digito = digitoConta;
         this.cliente = cliente;
         digitoConta += 1;
     }
-    public String getNumAgencia() {
+    public int getNumAgencia() {
         return numAgencia;
     }
-    public void setNumAgencia(String numAgencia) {
+    public void setNumAgencia(int numAgencia) {
         this.numAgencia = numAgencia;
     }
     public int getNumConta() {

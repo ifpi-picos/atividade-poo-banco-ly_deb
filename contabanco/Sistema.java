@@ -11,9 +11,13 @@ public class Sistema {
     static Random random =  new Random();
     static DateTimeFormatter sdf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     static ArrayList<Conta> contasBancarias;
+    static ArrayList<ContaCorrente> contaBacariaCorrentes;
+    static ArrayList<ContaPoupanca> contaBacariaPoupancas;
         
         public static void main(String[] args){
             contasBancarias = new ArrayList<>();
+            contaBacariaCorrentes = new ArrayList<>();
+            contaBacariaPoupancas = new ArrayList<>();
             operacoes();
         }
 
@@ -106,20 +110,46 @@ public class Sistema {
             int numCasa = scan.nextInt();
             scan.nextLine();
 
+            System.out.println("Qual o tipo de Conta?");
+            System.out.println("\n1- Poupança  2- Corrente");
+            int tipo = scan.nextInt();
+
             System.out.println("\nO numero da Conta: ");
             int numConta = random.nextInt(99999)+10000;
             System.out.println(numConta);
             
             Endereco endereco = new Endereco(rua, numCasa, bairro);
             Cliente cliente = new Cliente(nomeCliente, dataDeNasc, cpf, endereco);
-            Conta conta = new Conta(numConta, cliente);
+            if(tipo == 1){
+                int numAgencia = 3456;
+                double saldo = 0.00f;
+                ContaPoupanca conta = new ContaPoupanca(numAgencia, numConta, saldo, cliente);
 
-            contasBancarias.add(conta);
+                System.out.println(cliente.toString());
+                System.out.println(conta.toString());
 
+                contaBacariaPoupancas.add(conta);
+
+                operacoes();
+            }else if(tipo == 2){
+                int numAgencia = 3478;
+                double saldo =  0.00f;
+                ContaCorrente conta = new ContaCorrente(numAgencia, numConta, saldo, cliente);
+
+                System.out.println(cliente.toString());
+                System.out.println(conta.toString());
+                
+                contaBacariaCorrentes.add(conta);
+
+                operacoes();
+            }else{
+                System.out.println("Error");
+                criarConta();
+            }  
             System.out.println("Sua conta foi Criada com Sucesso!");
-    
             operacoes();
         }
+      
 
         private static Conta encotraConta(int numConta){
             Conta conta = null;
