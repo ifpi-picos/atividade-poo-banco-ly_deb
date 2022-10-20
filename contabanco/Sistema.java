@@ -164,28 +164,44 @@ public class Sistema {
         }
 
         public static void deposita(){
+            System.out.println("\nDigite o número da agencia:");
+            int numAgencia = scan.nextInt();
 
-            System.out.println("Numero da Conta para Deposito: ");
-            int numConta = scan.nextInt();
-            scan.nextLine();
-            Conta conta = encotraConta(numConta);
+            if (numAgencia == 3456) {
+                System.out.println("\nDigite o número da conta para Depositar: ");
+                int numConta = scan.nextInt();
 
-            if(conta != null){
-                System.out.println("Valor do Deposito: ");
-                double valorDeposito = scan.nextDouble();
-                conta.depositar(valorDeposito);
-                System.out.println("Valor depositado com sucesso!");
-            } else {
-                System.out.println("Conta não encontrada!");
-            } 
+                Conta conta = encontrarContaP(numConta);
+                if(conta != null){
+                    System.out.println("\nDigite o valor para Deposito: ");
+                    Double valor = scan.nextDouble();
+                    conta.deposito(valor);
+                }else {
+                    System.out.println("\nConta não encontrada!");
+                }
+            } else if (numAgencia == 3478){
+                System.out.println("\nDigite o número da conta para Depositar: ");
+                int numConta = scan.nextInt();
+
+                Conta conta = encotraContaC(numConta);
+                if (conta != null) {
+                    System.out.println("\n Digite o valor para Deposito: ");
+                    Double valor = scan.nextDouble();
+                    conta.deposito(valor); 
+                }else {
+                    System.out.println("\nConta não encontrada!");
+                }
+            }else {
+                System.out.println("Error");
+                deposita();
+            }
             operacoes();
-        } 
+        }
 
         public static void sacar(){
 
             System.out.println("Digite o Numero da conta: ");
-            int numConta = scan.nextInt();
-
+            int numConta = scan.nextInt(); //18237 3456      conta 2 62738  agencia 3478
             Conta conta = encotraConta(numConta);
 
             if(conta != null){
