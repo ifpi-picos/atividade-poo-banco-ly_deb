@@ -6,5 +6,7 @@ public class ContaPoupanca extends Conta{
         super(numAgencia, numConta, saldo, cliente);
         //TODO Auto-generated constructor stub
     }
-    
+    public String toString() {
+        return super.toString();
+    }
 }
