@@ -11,5 +11,25 @@ public class ContaCorrente extends Conta {
     public String toString() {
         return super.toString();
     }
+
+    @Override
+    public void depositar(Double valor) {
+        valor += (valor * 10)/100;
+        super.depositar(valor);
+    }
+
+    @Override
+    public void sacar(Double valor) {
+        // TODO Auto-generated method stub
+        super.sacar(valor);
+    }
+
+    @Override
+    public void transferir(Conta contaDeposito, Double valor) {
+        // TODO Auto-generated method stub
+        super.transferir(contaDeposito, valor);
+    }
+   
+    
     
 }

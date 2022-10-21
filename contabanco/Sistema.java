@@ -13,12 +13,12 @@ public class Sistema {
     static ArrayList<ContaCorrente> contaBacariaCorrentes;
     static ArrayList<ContaPoupanca> contaBacariaPoupancas;
         
-        public static void main(String[] args){
+    public static void main(String[] args){
 
-            contaBacariaCorrentes = new ArrayList<>();
-            contaBacariaPoupancas = new ArrayList<>();
-            operacoes();
-        }
+        contaBacariaCorrentes = new ArrayList<>();
+        contaBacariaPoupancas = new ArrayList<>();
+        operacoes();
+    }
 
         public static void operacoes(){
             System.out.println("-----------------------------------------");
@@ -150,9 +150,9 @@ public class Sistema {
         }
       
         private static Conta encotraContaP(int numConta){
-            Conta conta = null;
+            ContaPoupanca conta = null;
             if(contaBacariaPoupancas.size() > 0 ){
-                for(Conta c : contaBacariaPoupancas){
+                for(ContaPoupanca c : contaBacariaPoupancas){
                     if(c.getNumConta() == numConta){
                         conta = c;
                     }
@@ -161,9 +161,9 @@ public class Sistema {
             return conta;
         }
         private static Conta encotraContaC(int numConta){
-            Conta conta = null;
+            ContaCorrente conta = null;
             if(contaBacariaCorrentes.size() > 0 ){
-                for(Conta c : contaBacariaCorrentes){
+                for(ContaCorrente c : contaBacariaCorrentes){
                     if(c.getNumConta() == numConta){
                         conta = c;
                     }
@@ -180,7 +180,7 @@ public class Sistema {
                 System.out.println("\nDigite o número da conta para Depositar: ");
                 int numConta = scan.nextInt();
 
-                Conta conta = encontrarContaP(numConta);
+                Conta conta = encontrarContap(numConta);
                 if(conta != null){
                     System.out.println("\nDigite o valor para Deposito: ");
                     Double valor = scan.nextDouble();
