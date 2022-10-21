@@ -7,6 +7,9 @@ public class ContaCorrente extends Conta {
         //TODO Auto-generated constructor stub
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString();
+    }
     
 }
