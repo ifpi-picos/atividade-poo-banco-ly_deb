@@ -1,4 +1,5 @@
  package contabanco;
+import java.security.spec.EncodedKeySpec;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class Sistema {
         contaBacariaCorrentes = new ArrayList<>();
         contaBacariaPoupancas = new ArrayList<>();
         operacoes();
+
     }
 
         public static void operacoes(){
@@ -119,6 +121,7 @@ public class Sistema {
             
             Endereco endereco = new Endereco(rua, numCasa, bairro);
             Cliente cliente = new Cliente(nomeCliente, dataDeNasc, cpf, endereco);
+
             if(tipo == 1){
                 int numAgencia = 3456;
                 double saldo = 0.00f;
@@ -139,7 +142,6 @@ public class Sistema {
                 System.out.println(conta.toString());
                 
                 contaBacariaCorrentes.add(conta);
-
                 operacoes();
             }else{
                 System.out.println("Error");
@@ -148,38 +150,6 @@ public class Sistema {
             System.out.println("Sua conta foi Criada com Sucesso!");
             operacoes();
         }
-      
-        private static Conta encotraContaP(int numConta){
-            ContaPoupanca conta = null;
-            if(contaBacariaPoupancas.size() > 0 ){
-                for(ContaPoupanca c : contaBacariaPoupancas){
-                    if(c.getNumConta() == numConta){
-                        conta = c;
-                    }
-                }
-            }
-            return conta;
-        }
-        private static Conta encotraContaC(int numConta){
-            ContaCorrente conta = null;
-            if(contaBacariaCorrentes.size() > 0 ){
-                for(ContaCorrente c : contaBacariaCorrentes){
-                    if(c.getNumConta() == numConta){
-                        conta = c;
-                    }
-                }
-            }
-            return conta;
-        }
-
-       
-       
-       
-       
-       
-       
-       
-       
        
         public static void deposita(){
             System.out.println("\nDigite o número da agencia:");
@@ -189,11 +159,11 @@ public class Sistema {
                 System.out.println("\nDigite o número da conta para Depositar: ");
                 int numConta = scan.nextInt();
 
-                Conta conta = encontrarContap(numConta);
+                ContaPoupanca conta = encontraContaP(numConta);
                 if(conta != null){
                     System.out.println("\nDigite o valor para Deposito: ");
                     Double valor = scan.nextDouble();
-                    conta.deposito(valor);
+                    conta.depositar(valor);
                 }else {
                     System.out.println("\nConta não encontrada!");
                 }
@@ -201,11 +171,11 @@ public class Sistema {
                 System.out.println("\nDigite o número da conta para Depositar: ");
                 int numConta = scan.nextInt();
 
-                Conta conta = encotraContaC(numConta);
+                Conta conta = encontraContaC(numConta);
                 if (conta != null) {
                     System.out.println("\n Digite o valor para Deposito: ");
                     Double valor = scan.nextDouble();
-                    conta.deposito(valor); 
+                    conta.depositar(valor);
                 }else {
                     System.out.println("\nConta não encontrada!");
                 }
@@ -220,9 +190,10 @@ public class Sistema {
             System.out.println("\n Digite o número da agencia: ");
             int numAgencia = scan.nextInt();
 
-            System.out.println("Digite o Numero da conta: ");
-            int numConta = scan.nextInt(); //18237 3456      conta 2 62738  agencia 3478
-            Conta conta = encotraConta(numConta);
+            if(numAgencia == 3456){
+                System.out.println("Digite o Numero da conta: ");
+                int numConta = scan.nextInt();
+                ContaPoupanca conta = encontraContaP(numConta);
 
                 if(conta != null){
 
@@ -232,10 +203,30 @@ public class Sistema {
 
                     System.out.println("Saque Realizado com sucessor!");
                 }else{
-                    System.out.println("Saque Realizado com sucessor!");
+                    System.out.println("Saque Não Realizado");
                 }
                 operacoes();
+            }else if(numAgencia == 3478){
+                System.out.println("Digite o Numero da conta: ");
+                int numConta = scan.nextInt();
+                ContaCorrente conta = encontraContaC(numConta);
+
+                if(conta != null){
+
+                    System.out.println("Valor para saque: ");
+                    double valorSaque = scan.nextDouble();
+                    conta.sacar(valorSaque);
+
+                    System.out.println("Saque Realizado com sucessor!");
+                }else{
+                    System.out.println("Saque Não Realizado");
+                }
+                operacoes();
+            }else{
+                System.out.println("\nAgencia não encontrada!");
+                sacar();
             }
+
         }
 
         public static void transferir(){
@@ -279,7 +270,7 @@ public class Sistema {
                     } else{
                         System.out.println("Conta não encontrada.");
                     }
-            }     else if(numAgenciaRem == 3478){
+            }else if(numAgenciaRem == 3478){
                 System.out.println("\nDigitem o número da conta do Remetente: ");
                 int numContaRem = scan.nextInt();
 
@@ -310,8 +301,6 @@ public class Sistema {
 
                             contaRem.transferir(contaDes, valor);
                         } 
-                    } else{
-                        System.out.println("\nConta não encontrada");
                     }
                 }else{
                     System.out.println("\nConta não encontrada.");
@@ -323,95 +312,6 @@ public class Sistema {
             }
             operacoes();
         }
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         public static void consultarsaldo(){
            System.out.println("\nDigite o número da Agencia: ");
            int numAgencia = scan.nextInt();
@@ -420,7 +320,7 @@ public class Sistema {
                 System.out.println("\nDigiete o número da Conta: ");
                 int numConta = scan.nextInt();
 
-                Conta contaExtrato = encotraContaP(numConta);
+                Conta contaExtrato = encontraContaP(numConta);
                 if(contaExtrato != null){
                     System.out.println(contaExtrato.getSaldo());
                 }else{
@@ -430,7 +330,7 @@ public class Sistema {
                 System.out.println("\nDigite o número da Conta: ");
                 int numConta = scan.nextInt();
 
-                Conta contaExtrato = encotraContaC(numConta);
+                Conta contaExtrato = encontraContaC(numConta);
                 if(contaExtrato != null){
                     System.out.println(contaExtrato.getSaldo());
                 }else{
@@ -442,5 +342,29 @@ public class Sistema {
            }
            operacoes();
         }
+          
+        private static ContaPoupanca encontraContaP(int numConta){
+            ContaPoupanca conta = null;
+            if(contaBacariaPoupancas.size() > 0 ){
+                for(ContaPoupanca c : contaBacariaPoupancas){
+                    if(c.getNumConta() == numConta){
+                        conta = c;
+                    }
+                }
+            }
+            return conta;
+        }
+        
+        private static ContaCorrente encontraContaC(int numConta){
+            ContaCorrente conta = null;
+            if(contaBacariaCorrentes.size() > 0 ){
+                for(ContaCorrente c : contaBacariaCorrentes){
+                    if(c.getNumConta() == numConta){
+                        conta = c;
+                    }
+                }
+            }
+            return conta;
+        }
    
-    }
+ }
