@@ -1,4 +1,4 @@
-package contabanco;
+ package contabanco;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -173,22 +173,39 @@ public class Sistema {
         }
 
         public static void deposita(){
+            System.out.println("\nDigite o número da agencia:");
+            int numAgencia = scan.nextInt();
 
-            System.out.println("Numero da Conta para Deposito: ");
-            int numConta = scan.nextInt();
-            scan.nextLine();
-            Conta conta = encotraContaP(numConta);
+            if (numAgencia == 3456) {
+                System.out.println("\nDigite o número da conta para Depositar: ");
+                int numConta = scan.nextInt();
 
-            if(conta != null){
-                System.out.println("Valor do Deposito: ");
-                double valorDeposito = scan.nextDouble();
-                conta.depositar(valorDeposito);
-                System.out.println("Valor depositado com sucesso!");
-            } else {
-                System.out.println("Conta não encontrada!");
-            } 
+                Conta conta = encontrarContaP(numConta);
+                if(conta != null){
+                    System.out.println("\nDigite o valor para Deposito: ");
+                    Double valor = scan.nextDouble();
+                    conta.deposito(valor);
+                }else {
+                    System.out.println("\nConta não encontrada!");
+                }
+            } else if (numAgencia == 3478){
+                System.out.println("\nDigite o número da conta para Depositar: ");
+                int numConta = scan.nextInt();
+
+                Conta conta = encotraContaC(numConta);
+                if (conta != null) {
+                    System.out.println("\n Digite o valor para Deposito: ");
+                    Double valor = scan.nextDouble();
+                    conta.deposito(valor); 
+                }else {
+                    System.out.println("\nConta não encontrada!");
+                }
+            }else {
+                System.out.println("Error");
+                deposita();
+            }
             operacoes();
-        } 
+        }
 
         
         
