@@ -94,7 +94,7 @@ public class Sistema {
                 System.out.println("Menor de idade!");
                 operacoes();
             }else {
-                System.out.println("Dara de nascimento invalida!");
+                System.out.println("Data de nascimento invalida!");
                 operacoes();
             }
 
@@ -114,9 +114,7 @@ public class Sistema {
             System.out.println("\n1- Poupança  2- Corrente");
             int tipo = scan.nextInt();
 
-            System.out.println("\nO numero da Conta: ");
             int numConta = random.nextInt(99999)+10000;
-            System.out.println(numConta);
             
             Endereco endereco = new Endereco(rua, numCasa, bairro);
             Cliente cliente = new Cliente(nomeCliente, dataDeNasc, cpf, endereco);
@@ -151,28 +149,28 @@ public class Sistema {
         }
        
         public static void deposita(){
-            System.out.println("\nDigite o número da agencia:");
+            System.out.println("\nDigite o número da agência:");
             int numAgencia = scan.nextInt();
 
             if (numAgencia == 3456) {
-                System.out.println("\nDigite o número da conta para Depositar: ");
+                System.out.println("\nDigite o número da conta para depositar: ");
                 int numConta = scan.nextInt();
 
                 ContaPoupanca conta = encontraContaP(numConta);
                 if(conta != null){
-                    System.out.println("\nDigite o valor para Deposito: ");
+                    System.out.println("\nDigite o valor para deposito: ");
                     Double valor = scan.nextDouble();
                     conta.depositar(valor);
                 }else {
                     System.out.println("\nConta não encontrada!");
                 }
             } else if (numAgencia == 3478){
-                System.out.println("\nDigite o número da conta para Depositar: ");
+                System.out.println("\nDigite o número da conta para depositar: ");
                 int numConta = scan.nextInt();
 
                 Conta conta = encontraContaC(numConta);
                 if (conta != null) {
-                    System.out.println("\n Digite o valor para Deposito: ");
+                    System.out.println("\nDigite o valor para deposito: ");
                     Double valor = scan.nextDouble();
                     conta.depositar(valor);
                 }else {
@@ -186,50 +184,47 @@ public class Sistema {
         }
 
         public static void sacar(){
-            System.out.println("\n Digite o número da agencia: ");
+            System.out.println("\nDigite o número da agencia: ");
             int numAgencia = scan.nextInt();
 
             if(numAgencia == 3456){
-                System.out.println("Digite o Numero da conta: ");
+                System.out.println("\nDigite o número da conta: ");
                 int numConta = scan.nextInt();
                 ContaPoupanca conta = encontraContaP(numConta);
 
                 if(conta != null){
 
-                    System.out.println("Valor para saque: ");
+                    System.out.println("\nValor para saque: ");
                     double valorSaque = scan.nextDouble();
                     conta.sacar(valorSaque);
-
-                    System.out.println("Saque Realizado com sucessor!");
                 }else{
-                    System.out.println("Saque Não Realizado");
+                    System.out.println("Conta não encontrada!");
                 }
                 operacoes();
             }else if(numAgencia == 3478){
-                System.out.println("Digite o Numero da conta: ");
+                System.out.println("\nDigite o número da conta: ");
                 int numConta = scan.nextInt();
                 ContaCorrente conta = encontraContaC(numConta);
 
                 if(conta != null){
 
-                    System.out.println("Valor para saque: ");
+                    System.out.println("\nValor para saque: ");
                     double valorSaque = scan.nextDouble();
                     conta.sacar(valorSaque);
 
-                    System.out.println("Saque Realizado com sucessor!");
                 }else{
-                    System.out.println("Saque Não Realizado");
+                    System.out.println("\nConta não encontrda");
                 }
                 operacoes();
             }else{
-                System.out.println("\nAgencia não encontrada!");
+                System.out.println("\nAgência não encontrada!");
                 sacar();
             }
 
         }
 
         public static void transferir(){
-            System.out.println("\nDigite o número da agencia do Remetente: ");
+            System.out.println("\nDigite o número da agência do rementente: ");
             int numAgenciaRem = scan.nextInt();
 
             if(numAgenciaRem == 3456){
@@ -247,10 +242,12 @@ public class Sistema {
 
                         Conta contaDes = encontraContaP(numContaDes);
                         if(contaDes != null){
-                            System.out.println("\nDigite o valor da Transferencia: ");
+                            System.out.println("\nDigite o valor da transfêrencia: ");
                             double valor = scan.nextDouble();
 
                             contaRem.transferir(contaDes, valor);
+                        }else {
+                            System.out.println("\nConta não encontrada!");
                         }
                     }else if(numAgenciaDes == 3478){
                         System.out.println("\nDigite o número da conta do Destinatario: ");
@@ -258,24 +255,24 @@ public class Sistema {
     
                         Conta contaDes = encontraContaC(numContaDes);
                         if(contaDes != null){
-                            System.out.println("\nDigite o valor da Transferencia: ");
+                            System.out.println("\nDigite o valor da transfêrencia: ");
                             double valor = scan.nextDouble();
     
                             contaRem.transferir(contaDes, valor);
                             }
                         }else{
-                            System.out.println("\nConta não Encontrada.");
+                            System.out.println("\nConta não encontrada!");
                         }
                     } else{
-                        System.out.println("Conta não encontrada.");
+                        System.out.println("Conta não encontrada!");
                     }
             }else if(numAgenciaRem == 3478){
-                System.out.println("\nDigitem o número da conta do Remetente: ");
+                System.out.println("\nDigite o número da conta do Remetente: ");
                 int numContaRem = scan.nextInt();
 
                 Conta contaRem = encontraContaC(numContaRem);
                 if(contaRem != null){
-                    System.out.println("\nDigite a agencia do Destinatario: ");
+                    System.out.println("\nDigite a agência do Destinatario: ");
                     int numAgenciaDes = scan.nextInt();
 
                     if(numAgenciaDes == 3456){
@@ -302,28 +299,28 @@ public class Sistema {
                         } 
                     }
                 }else{
-                    System.out.println("\nConta não encontrada.");
+                    System.out.println("\nConta não encontrada!");
                     transferir();
                 }
             }else{
-                System.out.println("Agencia não encontrada.");
+                System.out.println("Agência não encontrada!");
                 operacoes();
             }
             operacoes();
         }
         public static void consultarsaldo(){
-           System.out.println("\nDigite o número da Agencia: ");
+           System.out.println("\nDigite o número da Agência: ");
            int numAgencia = scan.nextInt();
 
            if(numAgencia == 3456){
-                System.out.println("\nDigiete o número da Conta: ");
+                System.out.println("\nDigite o número da Conta: ");
                 int numConta = scan.nextInt();
 
                 Conta contaExtrato = encontraContaP(numConta);
                 if(contaExtrato != null){
                     System.out.println(contaExtrato.getSaldo());
                 }else{
-                    System.out.println("\nConta não Encontrada");
+                    System.out.println("\nConta não Encontrada!");
                 }
            }else if(numAgencia == 3478){
                 System.out.println("\nDigite o número da Conta: ");
@@ -333,10 +330,10 @@ public class Sistema {
                 if(contaExtrato != null){
                     System.out.println(contaExtrato.getSaldo());
                 }else{
-                    System.out.println("\nConta não encontrada.");
+                    System.out.println("\nConta não encontrada!");
                 }
            }else{
-            System.out.println("\nAgencia não encontrada.");
+            System.out.println("\nAgência não encontrada!");
             operacoes();
            }
            operacoes();

@@ -40,32 +40,31 @@ public class Conta {
         this.saldo = saldo;
     }
     public String toStringpub(){
-        return "\nNUmero da conta: " + this.getNumConta() +
+        return "\nNúmero da conta: " + this.getNumConta() +
                 "\nNome: " + this.cliente.getNomeCliente() +
                 "\nCPF: " + this.cliente.getCpf();
     }
     public String toString(){
-        return  "\nNUmero da conta: " + this.getNumConta() +
+        return  "\nNúmero da agencia: " + this.getNumAgencia() + 
+                "\nNúmero da conta: " + this.getNumConta() +
                 "\nDigito: " + this.getDigito() +
-                "\nNome: " + this.cliente.getNomeCliente() +
-                "\nCPF: " + this.cliente.getCpf() +
                 "\nSaldo: " + this.getSaldo();
     }
     public void transferir(Conta contaDeposito, Double valor){
         if(valor > 0 && this.getSaldo() >= valor){
             setSaldo(getSaldo() - valor);
             contaDeposito.saldo = contaDeposito.getSaldo() + valor;
-            System.out.println("Transferencia Realizada com sucesso! ");
+            System.out.println("Transfêrencia realizada com sucesso! ");
         } else {
-            System.out.println("Não foi possivel realizar a transferencia!");
+            System.out.println("Não foi possivel realizar a transfêrencia!");
         }
     }
     public void sacar(Double valor){
         if(valor >0 && this.getSaldo() >= valor){
             setSaldo(getSaldo() - valor);
-            System.out.println("Saque realisado com sucesso!");
+            System.out.println("Saque realizado com sucesso!");
         } else {
-            System.out.println("Não foi possivel realisa o saque!");
+            System.out.println("Não foi possivel realizar o saque!");
         }
     }
     
@@ -74,7 +73,7 @@ public class Conta {
             setSaldo(getSaldo() + valor);
             System.out.println("Seu Deposito foi realizado com sucesso!");
         }else {
-            System.out.println("Não foi possive4l realizar o seu deposito!");
+            System.out.println("Não foi possivel realizar o seu deposito!");
         }
     }
     
