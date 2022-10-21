@@ -163,6 +163,15 @@ public class Sistema {
             return conta;
         }
 
+       
+       
+       
+       
+       
+       
+       
+       
+       
         public static void deposita(){
             System.out.println("\nDigite o número da agencia:");
             int numAgencia = scan.nextInt();
@@ -198,10 +207,51 @@ public class Sistema {
             operacoes();
         }
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         public static void sacar(){
 
             System.out.println("Digite o Numero da conta: ");
-            int numConta = scan.nextInt(); //18237 3456      conta 2 62738  agencia 3478
+            int numConta = scan.nextInt();
             Conta conta = encotraConta(numConta);
 
             if(conta != null){
@@ -218,35 +268,89 @@ public class Sistema {
         }
 
         public static void transferir(){
-            System.out.println("Numero da conta do remetente:");
-            int numContaRem = scan.nextInt();
+            System.out.println("\nDigite o número da agencia do Remetente: ");
+            int numAgenciaRem = scan.nextInt();
 
-            Conta contaRem = encotraConta(numContaRem);
+            if(numAgenciaRem == 3456){
+                System.out.println("\nDigite o número da conta do Remetente: ");
+                int numContaRem = scan.nextInt();
+            
+                Conta contaRem = encontraContaP(numContaRem);
+                if(contaRem != null){
+                    System.out.println("\nDigite o número da agencia do Destinatario:");
+                    int numAgenciaDes = scan.nextInt();
 
-            if(contaRem != null){
-                System.out.println("Numero da conta do destinatariio: ");
-                int numContaDes = scan.nextInt();
+                    if(numAgenciaDes == 3456){
+                        System.out.println("\nDigite o número da conta do Destinatario: ");
+                        int numContaDes = scan.nextInt();
 
-                Conta contaDes = encotraConta(numContaDes);
+                        Conta contaDes = encontraContaP(numContaDes);
+                        if(contaDes != null){
+                            System.out.println("\nDigite o valor da Transferencia: ");
+                            double valor = scan.nextDouble();
 
-                if(contaDes != null){
-                    System.out.println("Valor da transferencia: ");
-                    double valor = scan.nextDouble();
-
-                    System.out.println("\nTransferindo de: " + contaRem.toStringpub());
-                    System.out.println("\npara: " + contaDes.toStringpub());
-
-                    System.out.println("\nContirma a Transferencia aperte[1] ou sair[0]? ");
-                    int resp = scan.nextInt();
-
-                    if(resp == 1){
-                        contaRem.transferir(contaDes, valor);
-                    } else {
-                        operacoes();
+                            contaRem.transferir(contaDes, valor);
+                        }
+                    }else if(numAgenciaDes == 3478){
+                        System.out.println("\nDigite o número da conta do Destinatario: ");
+                        int numContaDes = scan.nextInt();
+    
+                        Conta contaDes = encontraContaC(numContaDes);
+                        if(contaDes != null){
+                            System.out.println("\nDigite o valor da Transferencia: ");
+                            double valor = scan.nextDouble();
+    
+                            contaRem.transferir(contaDes, valor);
+                            }
+                        }else{
+                            System.out.println("\nConta não Encontrada.");
+                        }
+                    } else{
+                        System.out.println("Conta não encontrada.");
                     }
+            }     else if(numAgenciaRem == 3478){
+                System.out.println("\nDigitem o número da conta do Remetente: ");
+                int numContaRem = scan.nextInt();
+
+                Conta contaRem = encontraContaC(numContaRem);
+                if(contaRem != null){
+                    System.out.println("\nDigite a agencia do Destinatario: ");
+                    int numAgenciaDes = scan.nextInt();
+
+                    if(numAgenciaDes == 3456){
+                        System.out.println("\nDigite o número da conta do Destinatario: ");
+                        int numContaDes = scan.nextInt();
+
+                        Conta contaDes = encontraContaP(numContaDes);
+                        if(contaDes != null){
+                            System.out.println("\nDigite o valor: ");
+                            double valor = scan.nextDouble();
+
+                            contaRem.transferir(contaDes, valor);
+                        }
+                    }else if(numAgenciaDes == 3478){
+                        System.out.println("\nDigite o número da conta do Destinatario: ");
+                        int numContaDes = scan.nextInt();
+
+                        Conta contaDes = encontraContaC(numContaDes);
+                        if(contaDes != null){
+                            System.out.println("\nDigite o valor: ");
+                            double valor = scan.nextDouble();
+
+                            contaRem.transferir(contaDes, valor);
+                        } 
+                    } else{
+                        System.out.println("\nConta não encontrada");
+                    }
+                }else{
+                    System.out.println("\nConta não encontrada.");
+                    transferir();
                 }
+            }else{
+                System.out.println("Agencia não encontrada.");
+                operacoes();
             }
-            operacoes();  
+            operacoes();
         }
 
         public static void consultarsaldo(){
