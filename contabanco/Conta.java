@@ -55,7 +55,7 @@ public class Conta {
         if(valor > 0 && this.getSaldo() >= valor){
             setSaldo(getSaldo() - valor);
             contaDeposito.saldo = contaDeposito.getSaldo() + valor;
-            System.out.println("Transferencia Realizada com sucesso! ");
+            System.out.println("Transferencia Realizada com sucesso!");
         } else {
             System.out.println("Não foi possivel realizar a transferencia!");
         }

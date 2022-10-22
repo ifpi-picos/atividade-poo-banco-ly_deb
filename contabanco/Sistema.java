@@ -1,5 +1,4 @@
  package contabanco;
-import java.security.spec.EncodedKeySpec;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -136,7 +135,7 @@ public class Sistema {
             }else if(tipo == 2){
                 int numAgencia = 3478;
                 double saldo =  0.00f;
-                ContaCorrente conta = new ContaCorrente(numAgencia, numConta, saldo, cliente);
+                ContaCorrente conta = new ContaCorrente(0, 6000.00, numAgencia, numConta, saldo, cliente);
 
                 System.out.println(cliente.toString());
                 System.out.println(conta.toString());
@@ -212,11 +211,17 @@ public class Sistema {
                 ContaCorrente conta = encontraContaC(numConta);
 
                 if(conta != null){
+                    System.out.println("\nQual o tipo do Saque?");
+                    System.out.println("\n 1 | Cheque Especial \n2 | Saldo da Conta");
+                    int resp = scan.nextInt();
 
                     System.out.println("Valor para saque: ");
                     double valorSaque = scan.nextDouble();
-                    conta.sacar(valorSaque);
-
+                    if(resp == 1){
+                        conta.sacarCheque(valorSaque);
+                    }else if(resp == 2){
+                        conta.sacar(valorSaque);
+                    }
                     System.out.println("Saque Realizado com sucessor!");
                 }else{
                     System.out.println("Saque Não Realizado");
@@ -226,7 +231,6 @@ public class Sistema {
                 System.out.println("\nAgencia não encontrada!");
                 sacar();
             }
-
         }
 
         public static void transferir(){
@@ -237,32 +241,34 @@ public class Sistema {
                 System.out.println("\nDigite o número da conta do Remetente: ");
                 int numContaRem = scan.nextInt();
             
-                Conta contaRem = encontraContaP(numContaRem);
+                ContaPoupanca contaRem = encontraContaP(numContaRem);
                 if(contaRem != null){
                     System.out.println("\nDigite o número da agencia do Destinatario:");
                     int numAgenciaDes = scan.nextInt();
-
+                    
                     if(numAgenciaDes == 3456){
                         System.out.println("\nDigite o número da conta do Destinatario: ");
                         int numContaDes = scan.nextInt();
-
-                        Conta contaDes = encontraContaP(numContaDes);
+                        
+                        ContaPoupanca contaDes = encontraContaP(numContaDes);
                         if(contaDes != null){
                             System.out.println("\nDigite o valor da Transferencia: ");
                             double valor = scan.nextDouble();
-
+                            
                             contaRem.transferir(contaDes, valor);
+                            contaRem.taxaDeTransferencia(contaRem, valor);
                         }
                     }else if(numAgenciaDes == 3478){
                         System.out.println("\nDigite o número da conta do Destinatario: ");
                         int numContaDes = scan.nextInt();
     
-                        Conta contaDes = encontraContaC(numContaDes);
+                        ContaCorrente contaDes = encontraContaC(numContaDes);
                         if(contaDes != null){
                             System.out.println("\nDigite o valor da Transferencia: ");
                             double valor = scan.nextDouble();
     
                             contaRem.transferir(contaDes, valor);
+                            contaRem.taxaDeTransferencia(contaRem, valor);
                             }
                         }else{
                             System.out.println("\nConta não Encontrada.");
@@ -274,7 +280,7 @@ public class Sistema {
                 System.out.println("\nDigitem o número da conta do Remetente: ");
                 int numContaRem = scan.nextInt();
 
-                Conta contaRem = encontraContaC(numContaRem);
+                ContaCorrente contaRem = encontraContaC(numContaRem);
                 if(contaRem != null){
                     System.out.println("\nDigite a agencia do Destinatario: ");
                     int numAgenciaDes = scan.nextInt();
@@ -283,23 +289,25 @@ public class Sistema {
                         System.out.println("\nDigite o número da conta do Destinatario: ");
                         int numContaDes = scan.nextInt();
 
-                        Conta contaDes = encontraContaP(numContaDes);
+                        ContaPoupanca contaDes = encontraContaP(numContaDes);
                         if(contaDes != null){
                             System.out.println("\nDigite o valor: ");
                             double valor = scan.nextDouble();
 
                             contaRem.transferir(contaDes, valor);
+                            contaRem.contadorTransferencia(contaRem, valor);
                         }
                     }else if(numAgenciaDes == 3478){
                         System.out.println("\nDigite o número da conta do Destinatario: ");
                         int numContaDes = scan.nextInt();
-
-                        Conta contaDes = encontraContaC(numContaDes);
+                        
+                        ContaCorrente contaDes = encontraContaC(numContaDes);
                         if(contaDes != null){
                             System.out.println("\nDigite o valor: ");
                             double valor = scan.nextDouble();
-
+                            
                             contaRem.transferir(contaDes, valor);
+                            contaRem.contadorTransferencia(contaRem, valor);
                         } 
                     }
                 }else{
@@ -320,7 +328,7 @@ public class Sistema {
                 System.out.println("\nDigiete o número da Conta: ");
                 int numConta = scan.nextInt();
 
-                Conta contaExtrato = encontraContaP(numConta);
+                ContaPoupanca contaExtrato = encontraContaP(numConta);
                 if(contaExtrato != null){
                     System.out.println(contaExtrato.getSaldo());
                 }else{
@@ -330,7 +338,7 @@ public class Sistema {
                 System.out.println("\nDigite o número da Conta: ");
                 int numConta = scan.nextInt();
 
-                Conta contaExtrato = encontraContaC(numConta);
+                ContaCorrente contaExtrato = encontraContaC(numConta);
                 if(contaExtrato != null){
                     System.out.println(contaExtrato.getSaldo());
                 }else{
