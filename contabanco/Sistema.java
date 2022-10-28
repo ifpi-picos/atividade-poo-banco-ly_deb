@@ -63,19 +63,19 @@ public class Sistema {
         }
 
         public static void criarConta(){
-            Cliente man = new Cliente();
+            Cliente cliente = new Cliente();
             System.out.print("\nNome: ");
             String nomeCliente = scan.nextLine();
     
             System.out.print("\nCPF: ");
             String cpft = scan.nextLine();
 
-            if (man.checaCPF(cpft).equals("V")){
+            if (cliente.checaCPF(cpft).equals("V")){
 
-            }else if(man.checaCPF(cpft).equals("Il")){
+            }else if(cliente.checaCPF(cpft).equals("Il")){
                 System.out.println("CPF invalido.");
                 operacoes();
-            }else if(man.checaCPF(cpft).equals("In")){
+            }else if(cliente.checaCPF(cpft).equals("In")){
                 System.out.println("Quantidade de números invalido.");
                 operacoes();
             }else{
@@ -88,9 +88,9 @@ public class Sistema {
             System.out.println("\nData de nascimento: ");
             LocalDate data = LocalDate.parse(scan.nextLine(), sdf);
 
-            if(man.checaData(data).equals("Y")){
+            if(cliente.checaData(data).equals("Y")){
 
-            }else if (man.checaData(data).equals("M")){
+            }else if (cliente.checaData(data).equals("M")){
                 System.out.println("Menor de idade!");
                 operacoes();
             }else {
@@ -117,14 +117,14 @@ public class Sistema {
             int numConta = random.nextInt(99999)+10000;
             
             Endereco endereco = new Endereco(rua, numCasa, bairro);
-            Cliente cliente = new Cliente(nomeCliente, dataDeNasc, cpf, endereco);
+            Cliente clientes = new Cliente(nomeCliente, dataDeNasc, cpf, endereco);
 
             if(tipo == 1){
                 int numAgencia = 3456;
                 double saldo = 0.00f;
-                ContaPoupanca conta = new ContaPoupanca(numAgencia, numConta, saldo, cliente);
+                ContaPoupanca conta = new ContaPoupanca(numAgencia, numConta, saldo, clientes);
 
-                System.out.println(cliente.toString());
+                System.out.println(clientes.toString());
                 System.out.println(conta.toString());
 
                 contaBacariaPoupancas.add(conta);
@@ -133,9 +133,9 @@ public class Sistema {
             }else if(tipo == 2){
                 int numAgencia = 3478;
                 double saldo =  0.00f;
-                ContaCorrente conta = new ContaCorrente(0, 6000.00, numAgencia, numConta, saldo, cliente);
+                ContaCorrente conta = new ContaCorrente(0, 6000.00, numAgencia, numConta, saldo, clientes);
 
-                System.out.println(cliente.toString());
+                System.out.println(clientes.toString());
                 System.out.println(conta.toString());
                 
                 contaBacariaCorrentes.add(conta);
