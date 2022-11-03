@@ -326,6 +326,7 @@ public class Sistema {
 
                 ContaPoupanca contaExtrato = encontraContaP(numConta);
                 if(contaExtrato != null){
+                    System.out.println("Seu saldo é de: ");
                     System.out.println(contaExtrato.getSaldo());
                 }else{
                     System.out.println("\nConta não Encontrada!");
@@ -336,6 +337,7 @@ public class Sistema {
 
                 ContaCorrente contaExtrato = encontraContaC(numConta);
                 if(contaExtrato != null){
+                    System.out.println("Seu saldo é de: ");
                     System.out.println(contaExtrato.getSaldo());
                 }else{
                     System.out.println("\nConta não encontrada!");
