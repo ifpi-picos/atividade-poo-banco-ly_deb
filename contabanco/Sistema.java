@@ -63,19 +63,24 @@ public class Sistema {
         }
 
         public static void criarConta(){
-            Cliente man = new Cliente();
+            Cliente cliente = new Cliente();
+
             System.out.print("\nNome: ");
             String nomeCliente = scan.nextLine();
+            if(cliente.checarString(nomeCliente) == false){
+                System.out.println("Nome invalido.");
+                operacoes();
+            }
     
             System.out.print("\nCPF: ");
             String cpft = scan.nextLine();
 
-            if (man.checaCPF(cpft).equals("V")){
+            if (cliente.checaCPF(cpft).equals("V")){
 
-            }else if(man.checaCPF(cpft).equals("Il")){
+            }else if(cliente.checaCPF(cpft).equals("Il")){
                 System.out.println("CPF invalido.");
                 operacoes();
-            }else if(man.checaCPF(cpft).equals("In")){
+            }else if(cliente.checaCPF(cpft).equals("In")){
                 System.out.println("Quantidade de números invalido.");
                 operacoes();
             }else{
@@ -85,12 +90,12 @@ public class Sistema {
 
             String cpf = cpft;
 
-            System.out.println("\nData de nascimento: ");
+            System.out.println("\nData de nascimento(dd/mm/aaaa): ");
             LocalDate data = LocalDate.parse(scan.nextLine(), sdf);
 
-            if(man.checaData(data).equals("Y")){
+            if(cliente.checaData(data).equals("Y")){
 
-            }else if (man.checaData(data).equals("M")){
+            }else if (cliente.checaData(data).equals("M")){
                 System.out.println("Menor de idade!");
                 operacoes();
             }else {
@@ -100,15 +105,33 @@ public class Sistema {
 
             LocalDate dataDeNasc = data;
 
-            System.out.println("\nNome da Rua: ");
-            String rua = scan.nextLine();
-
-            System.out.println("\nNome do bairro: ");
-            String bairro = scan.nextLine();
+            System.out.println("\nLogradouro: ");
+            String logradouro = scan.nextLine();
 
             System.out.println("\nNúmero da casa: ");
             int numCasa = scan.nextInt();
             scan.nextLine();
+
+            System.out.println("\nBairro: ");
+            String bairro = scan.nextLine();
+            if(cliente.checarString(bairro) == false){
+                System.out.println("Nome invalido.");
+                operacoes();
+            }
+            
+            System.out.println("\nCidade: ");
+            String cidade = scan.nextLine();
+            if(cliente.checarString(cidade) == false){
+                System.out.println("Nome invalido.");
+                operacoes();
+            }
+
+            System.out.println("\nEstado: ");
+            String uf = scan.nextLine();
+            if(cliente.checarString(uf) == false){
+                System.out.println("Nome invalido.");
+                operacoes();
+            }
 
             System.out.println("Qual o tipo de Conta?");
             System.out.println("\n1- Poupança  2- Corrente");
@@ -116,33 +139,38 @@ public class Sistema {
 
             int numConta = random.nextInt(99999)+10000;
             
-            Endereco endereco = new Endereco(rua, numCasa, bairro);
-            Cliente cliente = new Cliente(nomeCliente, dataDeNasc, cpf, endereco);
+            Endereco endereco = new Endereco(logradouro, numCasa, bairro, cidade, uf);
+            Cliente clientes = new Cliente(nomeCliente, dataDeNasc, cpf, endereco);
 
             if(tipo == 1){
                 int numAgencia = 3456;
                 double saldo = 0.00f;
-                ContaPoupanca conta = new ContaPoupanca(numAgencia, numConta, saldo, cliente);
+                ContaPoupanca conta = new ContaPoupanca(numAgencia, numConta, saldo, clientes);
 
-                System.out.println(cliente.toString());
+                linha();
+                System.out.println(clientes.toString());
+                System.out.println(endereco.toString());
                 System.out.println(conta.toString());
+                linha();
 
                 contaBacariaPoupancas.add(conta);
-
                 operacoes();
             }else if(tipo == 2){
                 int numAgencia = 3478;
                 double saldo =  0.00f;
-                ContaCorrente conta = new ContaCorrente(0, 6000.00, numAgencia, numConta, saldo, cliente);
+                ContaCorrente conta = new ContaCorrente(0, 6000.00, numAgencia, numConta, saldo, clientes);
 
-                System.out.println(cliente.toString());
+                linha();
+                System.out.println(clientes.toString());
+                System.out.println(endereco.toString());
                 System.out.println(conta.toString());
+                linha();
                 
                 contaBacariaCorrentes.add(conta);
                 operacoes();
             }else{
                 System.out.println("Error");
-                criarConta();
+                operacoes();
             }  
             System.out.println("Sua conta foi Criada com Sucesso!");
             operacoes();
@@ -208,7 +236,7 @@ public class Sistema {
 
                 if(conta != null){
                     System.out.println("\nQual o tipo do Saque?");
-                    System.out.println("\n 1 | Cheque Especial \n2 | Saldo da Conta");
+                    System.out.println("\n1 | Cheque Especial \n2 | Saldo da Conta");
                     int resp = scan.nextInt();
 
                     System.out.println("\nValor para saque: ");
@@ -218,7 +246,6 @@ public class Sistema {
                     }else if(resp == 2){
                         conta.sacar(valorSaque);
                     }
-                    System.out.println("Saque Realizado com sucessor!");
                 }else{
                     System.out.println("\nConta não encontrda");
                 }
@@ -337,8 +364,11 @@ public class Sistema {
 
                 ContaCorrente contaExtrato = encontraContaC(numConta);
                 if(contaExtrato != null){
-                    System.out.println("\nSeu saldo é de: ");
+                    System.out.println("Extrato da Conta:");
                     System.out.println(contaExtrato.getSaldo());
+                    System.out.println("Valor disponivel no cheque especial:");
+                    System.out.println(contaExtrato.getChequeSepecial());
+
                 }else{
                     System.out.println("\nConta não encontrada!");
                 }
@@ -371,6 +401,9 @@ public class Sistema {
                 }
             }
             return conta;
+        }
+        public static String linha(){
+            return "=================================";
         }
    
  }
