@@ -50,7 +50,6 @@ public class Cliente {
             return "I";
         }
     }
-
     public String checaCPF(String cpf){
         cpf = cpf.trim();
         cpf = cpf.replace("-", "");
@@ -66,5 +65,9 @@ public class Cliente {
         }else{
             return "I";
         }
+    }
+    public boolean checarString(String nome){
+      boolean isletra = nome.matches(nome);
+        return isletra;
     }
 }

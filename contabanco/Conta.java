@@ -69,9 +69,8 @@ public class Conta {
     }
     
     public void depositar(Double valor){
-        if(valor >0 ){
+        if(valor > 0 ){
             setSaldo(getSaldo() + valor);
-            System.out.println("Seu Deposito foi realizado com sucesso!");
         }else {
             System.out.println("Não foi possivel realizar o seu deposito!");
         }
