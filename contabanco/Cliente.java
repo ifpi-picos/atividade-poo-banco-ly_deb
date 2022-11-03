@@ -24,6 +24,7 @@ public class Cliente {
         this.nomeCliente = nomeCliente;
     }
     public LocalDate getDataDeNasc() {
+        
         return dataDeNasc;
     }
     public void setDataDeNasc(LocalDate dataDeNasc) {
