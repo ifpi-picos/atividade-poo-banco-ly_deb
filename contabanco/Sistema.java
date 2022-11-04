@@ -139,7 +139,7 @@ public class Sistema {
             System.out.println("\nREceber notificação por:\n1 - Email  2 - SMS");
             int notifTipo = scan.nextInt();
             scan.nextLine();
-            System.out.println("\nDigite o endereço Virtual: ");
+            System.out.println("\nDigite o endereço virtual: ");
             String enderecoVitual = scan.nextLine();
 
             Endereco endereco = new Endereco(logradouro, numCasa, bairro, cidade, uf);
@@ -176,22 +176,22 @@ public class Sistema {
                 System.out.println(conta.toString());
                             
                 contaBacariaCorrentes.add(conta);
-                System.out.println("Sua conta foi Criada com Sucesso!");
+                System.out.println("Sua conta foi criada com sucesso!");
                 operacoes();
             }else{
                 System.out.println("Error");
                 operacoes();
             }  
-            System.out.println("Sua conta foi Criada com Sucesso!");
+            System.out.println("Sua conta foi criada com sucesso!");
             operacoes();
         }
        
         public static void deposita(){
-            System.out.println("\nDigite o número da agência:");
+            System.out.println("\nDigite o número da agência: ");
             int numAgencia = scan.nextInt();
 
             if (numAgencia == 3456) {
-                System.out.println("\nDigite o número da conta para depositar: ");
+                System.out.println("\nDigite o número da conta: ");
                 int numConta = scan.nextInt();
 
                 ContaPoupanca conta = encontraContaP(numConta);
@@ -208,7 +208,7 @@ public class Sistema {
                     System.out.println("\nConta não encontrada!");
                 }
             } else if (numAgencia == 3478){
-                System.out.println("\nDigite o número da conta para depositar: ");
+                System.out.println("\nDigite o número da conta: ");
                 int numConta = scan.nextInt();
 
                 Conta conta = encontraContaC(numConta);
@@ -232,7 +232,7 @@ public class Sistema {
         }
 
         public static void sacar(){
-            System.out.println("\nDigite o número da agencia: ");
+            System.out.println("\nDigite o número da agência: ");
             int numAgencia = scan.nextInt();
 
             if(numAgencia == 3456){
@@ -283,16 +283,16 @@ public class Sistema {
             int numAgenciaRem = scan.nextInt();
 
             if(numAgenciaRem == 3456){
-                System.out.println("\nDigite o número da conta do Remetente: ");
+                System.out.println("\nDigite o número da conta do remetente: ");
                 int numContaRem = scan.nextInt();
             
                 ContaPoupanca contaRem = encontraContaP(numContaRem);
                 if(contaRem != null){
-                    System.out.println("\nDigite o número da agencia do Destinatario:");
+                    System.out.println("\nDigite o número da agência do destinatário:");
                     int numAgenciaDes = scan.nextInt();
                     
                     if(numAgenciaDes == 3456){
-                        System.out.println("\nDigite o número da conta do Destinatario: ");
+                        System.out.println("\nDigite o número da conta do destinatário: ");
                         int numContaDes = scan.nextInt();
                         
                         ContaPoupanca contaDes = encontraContaP(numContaDes);
@@ -304,14 +304,14 @@ public class Sistema {
                             contaRem.taxaDeTransferencia(contaRem, valor);
 
                             if(contaDes.getTipoNotif().equals("Email")){
-                                email.enviarNotificacao("Transferencia", valor, contaDes.getEnderecoVitual());
+                                email.enviarNotificacao("Transfêrencia", valor, contaDes.getEnderecoVitual());
                             }else if(contaDes.getTipoNotif().equals("Sms")){
-                                sms.enviarNotificacao("Transfencia", valor, contaDes.getEnderecoVitual());
+                                sms.enviarNotificacao("Transfência", valor, contaDes.getEnderecoVitual());
                             }else{}
 
                         }
                     }else if(numAgenciaDes == 3478){ 
-                        System.out.println("\nDigite o número da conta do Destinatario: ");
+                        System.out.println("\nDigite o número da conta do destinatário: ");
                         int numContaDes = scan.nextInt();
     
                         ContaCorrente contaDes = encontraContaC(numContaDes);
@@ -323,9 +323,9 @@ public class Sistema {
                             contaRem.taxaDeTransferencia(contaRem, valor);
 
                             if(contaDes.getTipoNotif().equals("Email")){
-                                email.enviarNotificacao("Transferencia", valor, contaDes.getEnderecoVitual());
+                                email.enviarNotificacao("Transfêrencia", valor, contaDes.getEnderecoVitual());
                             }else if(contaDes.getTipoNotif().equals("Sms")){
-                                sms.enviarNotificacao("Transferencia", valor, contaDes.getEnderecoVitual());
+                                sms.enviarNotificacao("Transfêrencia", valor, contaDes.getEnderecoVitual());
                             }else{}
                             }
                         }else{
@@ -335,16 +335,16 @@ public class Sistema {
                         System.out.println("Conta não encontrada!");
                     }
             }else if(numAgenciaRem == 3478){
-                System.out.println("\nDigite o número da conta do Remetente: ");
+                System.out.println("\nDigite o número da conta do remetente: ");
                 int numContaRem = scan.nextInt();
 
                 ContaCorrente contaRem = encontraContaC(numContaRem);
                 if(contaRem != null){
-                    System.out.println("\nDigite a agência do Destinatario: ");
+                    System.out.println("\nDigite a agência do destinatário: ");
                     int numAgenciaDes = scan.nextInt();
 
                     if(numAgenciaDes == 3456){
-                        System.out.println("\nDigite o número da conta do Destinatario: ");
+                        System.out.println("\nDigite o número da conta do destinatário: ");
                         int numContaDes = scan.nextInt();
 
                         ContaPoupanca contaDes = encontraContaP(numContaDes);
@@ -356,13 +356,13 @@ public class Sistema {
                             contaRem.contadorTransferencia(contaRem, valor);
 
                             if(contaDes.getTipoNotif().equals("Email")){
-                                email.enviarNotificacao("Transferencia", valor, contaDes.getEnderecoVitual());
+                                email.enviarNotificacao("Transfêrencia", valor, contaDes.getEnderecoVitual());
                             }else if(contaRem.getTipoNotif().equals("Sms")){
-                                sms.enviarNotificacao("Transferencia", valor, contaDes.getEnderecoVitual());
+                                sms.enviarNotificacao("Transfêrencia", valor, contaDes.getEnderecoVitual());
                             }else{}
                         }
                     }else if(numAgenciaDes == 3478){
-                        System.out.println("\nDigite o número da conta do Destinatario: ");
+                        System.out.println("\nDigite o número da conta do destinátario: ");
                         int numContaDes = scan.nextInt();
                         
                         ContaCorrente contaDes = encontraContaC(numContaDes);
@@ -374,9 +374,9 @@ public class Sistema {
                             contaRem.contadorTransferencia(contaRem, valor);
 
                             if(contaDes.getTipoNotif().equals("Email")){
-                                email.enviarNotificacao("Transferencia", valor,contaDes.getEnderecoVitual());
+                                email.enviarNotificacao("Transfêrencia", valor,contaDes.getEnderecoVitual());
                             }else if(contaDes.getTipoNotif().equals("Sms")){
-                                sms.enviarNotificacao("Transferencia", valor, contaDes.getEnderecoVitual());
+                                sms.enviarNotificacao("Transfêrencia", valor, contaDes.getEnderecoVitual());
                             }else{}
                         } 
                     }
@@ -400,8 +400,9 @@ public class Sistema {
 
                 ContaPoupanca contaExtrato = encontraContaP(numConta);
                 if(contaExtrato != null){
-                    System.out.println("\nSeu saldo é de: ");
-                    System.out.println(contaExtrato.getSaldo());
+                    double saldo = contaExtrato.getSaldo();
+                    System.out.printf("\nExtrato da Conta: %.2f R$", saldo);
+                    System.out.println();
                 }else{
                     System.out.println("\nConta não Encontrada!");
                 }
@@ -411,8 +412,9 @@ public class Sistema {
                 
                 ContaCorrente contaExtrato = encontraContaC(numConta);
                 if(contaExtrato != null){
-                    System.out.println("Extrato da Conta: ");
-                    System.out.println(contaExtrato.getChequeSepecial() + " R$");
+                    double saldo = contaExtrato.getChequeSepecial();
+                    System.out.printf("Extrato da Conta: %.2f R$", saldo);
+                    System.out.println();
 
                 }else{
                     System.out.println("\nConta não encontrada!");
@@ -461,3 +463,4 @@ public class Sistema {
 
         }   
  }
+ 
