@@ -400,8 +400,8 @@ public class Sistema {
 
                 ContaPoupanca contaExtrato = encontraContaP(numConta);
                 if(contaExtrato != null){
-                    System.out.printf("Extrato da Conta: " );
-                    System.out.println(contaExtrato.getSaldo() + " R$");
+                    System.out.println("\nSeu saldo é de: ");
+                    System.out.println(contaExtrato.getSaldo());
                 }else{
                     System.out.println("\nConta não Encontrada!");
                 }
