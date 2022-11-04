@@ -4,8 +4,11 @@ import java.util.Calendar;
 public class Cliente {
     private String nomeCliente;
     private LocalDate dataDeNasc;
-    private Endereco endereco;
     private String cpf;
+    private Endereco endereco;
+   
+    //ver o tipo de notificação com o equals depois chamar o metodo com o tipo
+    //static no sistema(obs. colocar o endereço eletronico do remetente(bancoMaut) e do destinatario)
 
     public Cliente (){   
     }
@@ -15,6 +18,7 @@ public class Cliente {
         this.dataDeNasc = dadDeNasc;
         this.cpf = cpf;
         this.endereco = endereco;
+       
     }
     
     public String getNomeCliente() {
@@ -70,4 +74,5 @@ public class Cliente {
       boolean isletra = nome.matches(nome);
         return isletra;
     }
+   
 }

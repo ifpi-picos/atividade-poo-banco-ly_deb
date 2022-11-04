@@ -1,13 +1,13 @@
 package contabanco;
 
 public class ContaCorrente extends Conta {
-    private Double chequeSepecial = 6000.00;
+    Double chequeSepecial = 0.00;
     private int contador;
-
-    public ContaCorrente(int contador, Double chequeSepecial, int numAgencia, int numConta, Double saldo, Cliente cliente) {
-        super(numAgencia, numConta, saldo, cliente);
+    
+    public ContaCorrente(int contador, Double chequeSepecial, int numAgencia, int numConta, Double saldo, Cliente cliente, String tipoNotif, String enderecoVitual) {
+        super(numAgencia, numConta, saldo, cliente, tipoNotif, enderecoVitual);
         this.contador = 0;
-        this.chequeSepecial = 6000.00;
+        this.chequeSepecial = 0.00;
     }
     public int getContador() {
         return contador;
@@ -28,37 +28,20 @@ public class ContaCorrente extends Conta {
     
     @Override
     public void depositar(Double valor) {
-        if(this.chequeSepecial < 6000.00){
-            double falta = 6000.00 - getChequeSepecial();
-            if(valor >= falta){
-                setChequeSepecial(getChequeSepecial() + falta);
-                double resto = valor - falta;
-                if(resto != 0.00){
-                    super.depositar(resto);
-                    System.out.println("Depositado em conta:");
-                    System.out.println(resto);
-                }
-                System.out.println("Depositado em cheque especial:");
-                System.out.println(falta);
-            }
-            super.depositar(valor);
-        }else{
-            System.out.println("Depositado em conts:");
-            super.depositar(valor);
+        if(valor > 0 ){
+            setChequeSepecial(getChequeSepecial() + valor);
+        }else {
+            System.out.println("Não foi possivel realizar o seu deposito!");
         }
     }
     
-    @Override
-    public void sacar(Double valor) {
-        super.sacar(valor);
-    }
     
     public void sacarCheque(Double valor) {
-        if(valor > 0 && this.chequeSepecial >= valor){
+        if(this.chequeSepecial == -6000.00){
+            System.out.println("Não foi possivel realisa o saque!");
+        } else {
             setChequeSepecial(getChequeSepecial() - valor);
             System.out.println("Saque Realisado com sucesso!");
-        } else {
-            System.out.println("Não foi possivel realisa o saque!");
         }
     }
     
@@ -66,13 +49,41 @@ public class ContaCorrente extends Conta {
         this.contador += 1;
         if(this.contador > 2){
             Double taxa = (valor * 5)/100; 
-            setSaldo(getSaldo() - taxa);
+            setChequeSepecial(getChequeSepecial() - taxa);
         }
     }
     @Override
-    public void transferir(Conta contaDeposito, Double valor) {
+    /*public void transferir(Conta contaDeposito, Double valor) {
         super.transferir(contaDeposito, valor);
 
+    }*/
+    public void transferir(Conta contaDeposito, Double valor){
+        if(valor > 0 && this.getChequeSepecial() <= -6000){
+            System.out.println("Não foi possivel realizar a transfêrencia!");
+        } else {
+            setChequeSepecial(getChequeSepecial() -valor);
+            contaDeposito.saldo = contaDeposito.getSaldo() + valor;
+            System.out.println("Transferencia Realizada com sucesso!");
+        }
+    }
+
+    public void transferirCP(ContaPoupanca contaDeposito, Double valor){
+        if(valor > 0 && this.getChequeSepecial() <= -6000){
+            System.out.println("Não foi possivel realizar a transfêrencia!");
+        } else {
+            setChequeSepecial(getChequeSepecial() -valor);
+            contaDeposito.saldo = contaDeposito.getSaldo() + valor;
+            System.out.println("Transferencia Realizada com sucesso!");
+        } 
+    }
+    public void transferirCC(ContaCorrente contaDeposito, Double valor){
+        if(valor > 0 && this.getChequeSepecial() <= -6000){
+            System.out.println("Não foi possivel realizar a transfêrencia!");
+        } else {
+            setChequeSepecial(getChequeSepecial() -valor);
+            contaDeposito.chequeSepecial = contaDeposito.getChequeSepecial() + valor;
+            System.out.println("Transferencia Realizada com sucesso!");
+        }
     }
   
 }

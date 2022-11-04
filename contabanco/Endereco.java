@@ -1,10 +1,12 @@
 package contabanco;
 public class Endereco {
+
     private String logradouro;
     private int numCasa;
     private String bairro;
     private String cidade;
     private String uf;
+    
     public Endereco(String logradouro, int numCasa, String bairro, String cidade, String uf) {
         this.logradouro = logradouro;
         this.numCasa = numCasa;
@@ -44,8 +46,11 @@ public class Endereco {
     }
     @Override
     public String toString() {
-        return "Endereco [logradouro=" + logradouro + ", numCasa=" + numCasa + ", bairro=" + bairro + ", cidade="
-                + cidade + ", uf=" + uf + "]";
+        return "\nLogradouro: " + logradouro + 
+            "\nNúmero da Casa: " + numCasa + 
+            "\nBairro: " + bairro + 
+            "\nCidade: " + cidade + 
+            "\nEstado: " + uf;
     }
     
 }

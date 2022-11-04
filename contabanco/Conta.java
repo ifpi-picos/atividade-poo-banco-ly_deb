@@ -1,20 +1,22 @@
 package contabanco;
 public class Conta {
-    private static int digitoConta = 1;
     private int numAgencia;
     private int numConta;
-    private int digito;
     private Cliente cliente;
-    private double saldo;
-    
-    public Conta(int numAgencia, int numConta,Double saldo, Cliente cliente){
+    protected double saldo;
+    private String tipoNotif; 
+    private String enderecoVitual;
+
+    public Conta(int numAgencia, int numConta,Double saldo, Cliente cliente, String tipoNotif, String enderecoVitual){
         this.numAgencia = numAgencia;
         this.numConta = numConta;
         this.saldo = saldo;
-        this.digito = digitoConta;
         this.cliente = cliente;
-        digitoConta += 1;
+        this.tipoNotif = tipoNotif;
+        this.enderecoVitual = enderecoVitual;
+
     }
+   
     public int getNumAgencia() {
         return numAgencia;
     }
@@ -27,18 +29,25 @@ public class Conta {
     public void setNumConta(int numConta) {
         this.numConta = numConta;
     }
-    public int getDigito() {
-        return digito;
-    }
-    public void setDigito(int digito) {
-        this.digito = digito;
-    }
     public double getSaldo() {
         return saldo;
     }
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
+    public String getTipoNotif() {
+        return tipoNotif;
+    }
+    public void setTipoNotif(String tipoNotif) {
+        this.tipoNotif = tipoNotif;
+    }
+    public String getEnderecoVitual() {
+        return enderecoVitual;
+    }
+    public void setEnderecoVitual(String enderecoVitual) {
+        this.enderecoVitual = enderecoVitual;
+    }
+
     public String toStringpub(){
         return "\nNúmero da conta: " + this.getNumConta() +
                 "\nNome: " + this.cliente.getNomeCliente() +
@@ -47,7 +56,6 @@ public class Conta {
     public String toString(){
         return  "\nNúmero da agencia: " + this.getNumAgencia() + 
                 "\nNúmero da conta: " + this.getNumConta() +
-                "\nDigito: " + this.getDigito() +
                 "\nSaldo: " + this.getSaldo();
     }
     public void transferir(Conta contaDeposito, Double valor){
