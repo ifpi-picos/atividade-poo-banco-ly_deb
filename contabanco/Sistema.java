@@ -201,7 +201,7 @@ public class Sistema {
                     conta.depositar(valor);
                     if(conta.getTipoNotif().equals("Email")){
                         email.enviarNotificacao("Deposito", valor, conta.getEnderecoVitual());
-                    }else if(conta.getTipoNotif().equals("Sms")){
+                    }else if(conta.getTipoNotif().equals("SMS")){
                         sms.enviarNotificacao("Deposito", valor, conta.getEnderecoVitual());
                     }else{}
                 }else {
@@ -216,9 +216,9 @@ public class Sistema {
                     System.out.println("\nDigite o valor para deposito: ");
                     Double valor = scan.nextDouble();
                     conta.depositar(valor);
-                    if(conta.getTipoNotif().equals("Email")){
+                    if(conta.getTipoNotif().equals("SMS")){
                         email.enviarNotificacao("Deposito", valor, conta.getEnderecoVitual());
-                    }else if(conta.getTipoNotif().equals("Sms")){
+                    }else if(conta.getTipoNotif().equals("Email")){
                         sms.enviarNotificacao("Deposito", valor, conta.getEnderecoVitual());
                     }else{}
                 }else {
@@ -322,9 +322,9 @@ public class Sistema {
                             contaRem.transferirpC(contaDes, valor);
                             contaRem.taxaDeTransferencia(contaRem, valor);
 
-                            if(contaDes.getTipoNotif().equals("Email")){
+                            if(contaDes.getTipoNotif().equals("SMS")){
                                 email.enviarNotificacao("Transfêrencia", valor, contaDes.getEnderecoVitual());
-                            }else if(contaDes.getTipoNotif().equals("Sms")){
+                            }else if(contaDes.getTipoNotif().equals("Email")){
                                 sms.enviarNotificacao("Transfêrencia", valor, contaDes.getEnderecoVitual());
                             }else{}
                             }
@@ -463,4 +463,3 @@ public class Sistema {
 
         }   
  }
- 
